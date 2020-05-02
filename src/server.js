@@ -15,6 +15,11 @@ server.use(morgan(process.env.NODE_ENV || 'dev'));
 server.use(bodyParser.json());
 server.use('/notes', authMiddleware(), notesRouter);
 server.use('/user', userRouter);
+server.use('/health', (req, res) => {
+  res.json({
+    status: 'up'
+  });
+});
 
 server.listen(port, () => {
   /**
